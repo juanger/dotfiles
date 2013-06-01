@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby -r rubygems -r thor
+class Dotfiles < Thor
+  desc "install", "install the dotfiles in your home"
+  def install
+    invoke :bootstrap
+    Dir.glob(sources) do |file|
+      target = expanded_target(file)
+      if create_or_overwrite?(target)
+        File.symlink(file, target)
+      end
+    end
+  end
+  
+  desc "bootstrap", "make sure you have some cool gems"
+  def bootstrap
+    # This should check for our dependencies. Nothing to do for now.
+  end
+  
+private
+
+  def create_or_overwrite?(file)
+    if File.exists?(file)
+      overwrite?(file)
+    else
+      true
+    end
+  end
+  
+  def overwrite?(file)
+    return false if our_symlink?(file)
+    puts "#{File.basename(file)} already exists, what do you want to do? [s]kip, [o]verwrite, [k]eep both."
+    case $stdin.getc
+    when "s" then false
+    when "k"
+      File.rename(file, file + ".old")
+      true
+    when "o"
+      File.delete(file)
+      true
+    else false
+    end
+  end
+  
+  def our_symlink?(file)
+    # TODO: check that it is pointing to us
+    File.symlink?(file)
+  end
+  
+  def sources
+    File.join(File.expand_path(File.dirname(__FILE__)), "source", "*")
+  end
+  
+  def expanded_target(file)
+    File.expand_path("~/.#{File.basename(file)}")
+  end
+end
+
+Dotfiles.start

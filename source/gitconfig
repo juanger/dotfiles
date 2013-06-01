@@ -1,0 +1,7 @@
+[user]
+	name = Juan Germán Castañeda Echevarría
+	email = juanger@gmail.com
+[color]
+	ui = true
+[core]
+	excludesfile = ~/.gitignore
