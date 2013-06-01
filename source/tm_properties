@@ -1,0 +1,24 @@
+# Extra files to include
+#
+myExtraIncludes = ".tm_properties,.htaccess,.gitignore"
+fileBrowserGlob  = "{*,$myExtraIncludes}"
+include = "{$include,$myExtraIncludes}"
+
+# Hide log, vendor and tmp directories from search popups.
+#
+myExtraExcludes = "log,vendor,tmp"
+excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}"
+excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}"
+
+
+[ *.{icns,ico,jpg,jpeg,m4v,nib,pdf,png,psd,pyc,rtf,tif,tiff,xib} ]
+binary           = true
+
+[ source ]
+showInvisibles   = true
+softTabs         = true
+tabSize          = 2
+
+[ source.javascript ]
+tabSize          = 3
+
