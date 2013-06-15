@@ -17,8 +17,10 @@ Feel free to fork it for your own needs. This is intended to be a very simple do
 
 To run the installer you need ruby and the thor gem.
 
-gem install thor
-cd && git clone git@github.com:juanger/dotfiles.git .files
-./.files/run install
+`gem install thor`
+
+`cd && git clone git@github.com:juanger/dotfiles.git .files`
+
+`./.files/run install`
 
 
